@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <div class="info-box"></div>
+    <div class="main-block">
+        <h1 class="main-block__h1">Сокращатель ссылок</h1>
+        <div class="main-block__desc-button">
+            <p class="main-block__description">Вставьте ссылку, которую хотите сократить и нажмите <strong class="main-block__strong">Enter</strong> или на кнопку <strong class="main-block__strong">"Сократить"</strong>.</p><button form="main-form" class="main-block__button button-blue" data-callback="test">Сократить 
+                {% load static %}
+                <img class="shortly-block__scissors-icon icon" src="{% static 'img/vector/scissors.svg' %}" alt="">
+            </button>
+        </div>
+        <form id="main-form" class="main-block__form" action="{% url 'index' %}" method="post">
+            <div id="recaptcha" class="g-recaptcha" data-sitekey="6LfSx3kfAAAAAAuoxRu48WX8ZVCwE7Kh_4BIPzyT" data-callback="sendAfterCaptcha" data-size="invisible"></div>
+            <input class="main-block__input" name="url" autocomplete="off" type="text" placeholder="Поле для ссылки...">
+        </form>
+        <div class="alert-box"></div>
+    </div>
+    <div class="shortly-list">
+    </div>
+    <a href="https://github.com/daniilnetu" class="me">@daniilnetu</a>
+    {% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    fillObjsList(base_objs)
+    </script>
+</body>
+{% endblock %}
+
+
